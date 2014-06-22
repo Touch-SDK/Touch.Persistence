@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Touch.Persistence.NHibernate</id>
+        <version>1.0.0</version>
+        <authors>Artem Abashev</authors>
+        <projectUrl>https://github.com/Touch-SDK/Touch.Persistence</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>NHibernate storage for Touch SDK.</description>
+        <dependencies>
+            <dependency id="Touch" version="1.0.0" />
+            <dependency id="NHibernate" version="3.3.3.4001" />
+            <dependency id="NHibernate.Linq" version="1.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Touch.Persistence.NHibernate.dll" target="lib\Touch.Persistence.NHibernate.dll" />
+        <file src="bin\Release\Touch.Persistence.NHibernate.pdb" target="lib\Touch.Persistence.NHibernate.pdb" />
+    </files>
+</package>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Touch.Persistence.DynamoDB</id>
+        <version>1.0.0</version>
+        <authors>Artem Abashev</authors>
+        <projectUrl>https://github.com/Touch-SDK/Touch.Persistence</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>DynamoDB storage for Touch SDK.</description>
+        <dependencies>
+            <dependency id="AWSSDK" version="2.1.4.0" />
+            <dependency id="Touch" version="1.0.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Touch.Persistence.DynamoDB.dll" target="lib\Touch.Persistence.DynamoDB.dll" />
+        <file src="bin\Release\Touch.Persistence.DynamoDB.pdb" target="lib\Touch.Persistence.DynamoDB.pdb" />
+    </files>
+</package>

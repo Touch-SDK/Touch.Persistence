@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Touch.Persistence.Memcached</id>
+        <version>1.0.0</version>
+        <authors>Artem Abashev</authors>
+        <projectUrl>https://github.com/Touch-SDK/Touch.Persistence</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Memcached storage for Touch SDK.</description>
+        <dependencies>
+            <dependency id="Touch" version="1.0.0" />
+            <dependency id="AWSSDK" version="2.1.4.0" />
+            <dependency id="EnyimMemcached" version="2.12" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Touch.Persistence.Memcached.dll" target="lib\Touch.Persistence.Memcached.dll" />
+        <file src="bin\Release\Touch.Persistence.Memcached.pdb" target="lib\Touch.Persistence.Memcached.pdb" />
+    </files>
+</package>
