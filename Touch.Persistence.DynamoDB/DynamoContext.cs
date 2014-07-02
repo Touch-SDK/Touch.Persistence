@@ -38,6 +38,11 @@ namespace Touch.Persistence
         private readonly ConcurrentDictionary<Type, string> _tableNames = new ConcurrentDictionary<Type, string>();
 
         /// <summary>
+        /// Data contract hash key names.
+        /// </summary>
+        private readonly ConcurrentDictionary<Type, string> _hashKeyNames = new ConcurrentDictionary<Type, string>();
+
+        /// <summary>
         /// Data contract properties
         /// </summary>
         private readonly ConcurrentDictionary<Type, IEnumerable<KeyValuePair<string, PropertyInfo>>> _typeProperties = new ConcurrentDictionary<Type, IEnumerable<KeyValuePair<string, PropertyInfo>>>();
@@ -46,14 +51,14 @@ namespace Touch.Persistence
         #region IContext implementation
         public T Get<T>(string hashKey) where T : class, IDocument
         {
-            var value = new AttributeValue();
+            var hashKeyName = GetHashKeyName(typeof(T));
             var request = new GetItemRequest
             {
                 TableName = GetTableName(typeof(T)),
-                Key = new Dictionary<string,AttributeValue>{ {hashKey, value} },
-                ConsistentRead = _consistentReads
+                Key = new Dictionary<string, AttributeValue> { { hashKeyName, new AttributeValue { S = hashKey } } },
+                ConsistentRead = _consistentReads,
             };
-            
+
             var result = _client.GetItem(request);
             if (result.Item == null) return null;
 
@@ -67,11 +72,11 @@ namespace Touch.Persistence
 
         public void Delete<T>(string hashKey) where T : class, IDocument
         {
-            var value = new AttributeValue();
+            var hashKeyName = GetHashKeyName(typeof(T));
             var request = new DeleteItemRequest
             {
                 TableName = GetTableName(typeof(T)),
-                Key = new Dictionary<string,AttributeValue>{ {hashKey, value} }
+                Key = new Dictionary<string, AttributeValue> { { hashKeyName, new AttributeValue { S = hashKey } } }
             };
 
             _client.DeleteItem(request);
@@ -106,19 +111,32 @@ namespace Touch.Persistence
             _tableNames[type] = contractAttribute.Name;
 
             //Get type's properties
-            var validProperties = from property in type.GetProperties()
-                                  where property.CanWrite && property.CanRead
-                                  select property;
+            var validProperties = (from property in type.GetProperties()
+                                   where property.CanWrite && property.CanRead
+                                   select property).ToList();
 
-            _typeProperties[type] = (from property in validProperties
-                                     let memberAttribute =
-                                       property.GetCustomAttributes(typeof(DataMemberAttribute), true).FirstOrDefault()
-                                       as DataMemberAttribute
-                                     where memberAttribute != null
-                                     let propertyName = !string.IsNullOrEmpty(memberAttribute.Name)
-                                       ? memberAttribute.Name
-                                       : property.Name
-                                     select new KeyValuePair<string, PropertyInfo>(propertyName, property)).ToList();
+            var typeProperties = (from property in validProperties
+                                  let memberAttribute =
+                                    property.GetCustomAttributes(typeof(DataMemberAttribute), true).FirstOrDefault()
+                                    as DataMemberAttribute
+                                  where memberAttribute != null
+                                  let propertyName = !string.IsNullOrEmpty(memberAttribute.Name)
+                                    ? memberAttribute.Name
+                                    : property.Name
+                                  select new KeyValuePair<string, PropertyInfo>(propertyName, property)).ToList();
+
+            var hashProperty = (from property in validProperties
+                                let memberAttribute =
+                                  property.GetCustomAttributes(typeof(DataMemberAttribute), true).FirstOrDefault()
+                                  as DataMemberAttribute
+                                where memberAttribute != null && property.Name == "HashKey"
+                                select memberAttribute.Name).SingleOrDefault();
+
+            if (string.IsNullOrWhiteSpace(hashProperty))
+                throw new ArgumentException("Invalid data contract: missing DataMemberAttribute name for HashKey property");
+
+            _typeProperties[type] = typeProperties;
+            _hashKeyNames[type] = hashProperty;
         }
 
         /// <summary>
@@ -130,6 +148,17 @@ namespace Touch.Persistence
         {
             ProccessType(dataContract);
             return _tableNames[dataContract];
+        }
+
+        /// <summary>
+        /// Get hash key name.
+        /// </summary>
+        /// <param name="dataContract">Data contract type.</param>
+        /// <returns>Hash key name or <c>null</c> if type not found.</returns>
+        private string GetHashKeyName(Type dataContract)
+        {
+            ProccessType(dataContract);
+            return _hashKeyNames[dataContract];
         }
 
         private Dictionary<string, AttributeValue> GetValues(IDocument instance)
