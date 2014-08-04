@@ -1,4 +1,5 @@
-﻿using FluentNHibernate.Conventions;
+﻿using System.Linq;
+using FluentNHibernate.Conventions;
 using FluentNHibernate.Conventions.AcceptanceCriteria;
 using FluentNHibernate.Conventions.Inspections;
 using FluentNHibernate.Conventions.Instances;
@@ -23,6 +24,9 @@ namespace Touch.Domain.Conventions
         public void Apply(IManyToManyCollectionInstance instance)
         {
             instance.Table(instance.EntityType.Name.ToLower() + "_" + instance.ChildType.Name.ToLower());
+
+            instance.Key.Column(instance.EntityType.Name.ToLower() + "_id");
+            instance.Relationship.Column(instance.Relationship.StringIdentifierForModel.ToLower() + "_id");
         }
 
         public void Apply(IManyToOneInstance instance)
