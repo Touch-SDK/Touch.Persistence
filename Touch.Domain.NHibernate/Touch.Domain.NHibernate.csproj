@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conventions\AutomappingConfiguration.cs" />
+    <Compile Include="Conventions\PostgreSqlConvention.cs" />
     <Compile Include="Conventions\SqliteConvention.cs" />
     <Compile Include="Conventions\MsSqlConvention.cs" />
     <Compile Include="Conventions\EntityConvention.cs" />
