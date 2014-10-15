@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -87,7 +88,7 @@ namespace Touch.Persistence
             {
                 var session = _factory.GetCurrentSession();
 
-                if (session.Transaction.IsActive)
+                if (session.Transaction.IsActive && session.IsDirty())
                 {
                     try
                     {
