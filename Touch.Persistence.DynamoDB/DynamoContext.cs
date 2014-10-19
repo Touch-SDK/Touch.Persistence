@@ -93,6 +93,30 @@ namespace Touch.Persistence
             _client.PutItem(request);
         }
 
+        public IEnumerable<T> Query<T>(KeyValuePair<string, string> condition)
+            where T : class, IDocument
+        {
+            var request = new QueryRequest
+            {
+                TableName = GetTableName(typeof(T)),
+                IndexName = condition.Key + "-index",
+                KeyConditions = new Dictionary<string, Condition>
+                {
+                    {
+                        condition.Key, 
+                        new Condition
+                        {
+                            ComparisonOperator = ComparisonOperator.EQ, 
+                            AttributeValueList = new List<AttributeValue> { new AttributeValue { S = condition.Value } }
+                        }
+                    }
+                }
+            };
+
+            var result = _client.Query(request);
+
+            return result.Items.Select(item => (T) GetContract(typeof (T), item));
+        }
         #endregion
 
         #region Private methods
