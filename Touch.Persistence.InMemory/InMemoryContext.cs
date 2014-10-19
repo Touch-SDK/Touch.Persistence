@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Caching;
 
 namespace Touch.Persistence
@@ -51,6 +52,11 @@ namespace Touch.Persistence
             var value = new CacheItem(target.HashKey, target);
 
             _cache.Set(value, _defaultPolicy);
+        }
+
+        public IEnumerable<T> Query<T>(KeyValuePair<string, string> condition) where T : class, IDocument
+        {
+            throw new NotSupportedException();
         }
         #endregion
     }

@@ -17,7 +17,7 @@ namespace Touch.Persistence
         #endregion
 
         #region Abstract methods implementation
-        protected override T TryCatch(Func<T> func)
+        protected override TR TryCatch<TR>(Func<TR> func)
         {
             try
             {
