@@ -88,7 +88,7 @@ namespace Touch.Persistence
             {
                 var session = _factory.GetCurrentSession();
 
-                if (session.Transaction.IsActive && session.IsDirty())
+                if (session.Transaction.IsActive)
                 {
                     try
                     {
