@@ -33,9 +33,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AWSSDK, Version=2.1.4.0, Culture=neutral, PublicKeyToken=9f476d3089b52be3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\AWSSDK.2.1.4.0\lib\net45\AWSSDK.dll</HintPath>
+    <Reference Include="Amazon.ElastiCacheCluster">
+      <HintPath>..\packages\Amazon.ElastiCacheCluster.1.0.0.0\lib\net35\Amazon.ElastiCacheCluster.dll</HintPath>
     </Reference>
     <Reference Include="Enyim.Caching">
       <HintPath>..\..\packages\EnyimMemcached.2.12\lib\net35\Enyim.Caching.dll</HintPath>
@@ -49,12 +48,16 @@
     <Reference Include="System.Xml" />
     <Reference Include="Touch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Touch.1.0.0\lib\Touch.dll</HintPath>
+      <HintPath>..\packages\Touch.1.0.22\lib\Touch.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MemcachedContext.cs" />
+    <Compile Include="AwsMemcachedConnectionStringBuilder.cs" />
     <Compile Include="MemcachedContextProvider.cs" />
+    <Compile Include="EnyimLog.cs" />
+    <Compile Include="EnyimLogFactory.cs" />
+    <Compile Include="MemcachedContext.cs" />
+    <Compile Include="AwsMemcachedContextProvider.cs" />
     <Compile Include="MemcachedStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

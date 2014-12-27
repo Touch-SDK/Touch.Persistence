@@ -10,14 +10,14 @@ namespace Touch.Persistence
         where T : class, IDocument
     {
         #region .ctor
-        public MemcachedStore(IContextProvider contextProvider)
+        public MemcachedStore(AwsMemcachedContextProvider contextProvider)
             : base(contextProvider)
         {
         }
         #endregion
 
         #region Abstract methods implementation
-        protected override T TryCatch(Func<T> func)
+        protected override TR TryCatch<TR>(Func<TR> func)
         {
             try
             {
