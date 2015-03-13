@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch.Persistence.DynamoDB", "Touch.Persistence.DynamoDB\Touch.Persistence.DynamoDB.csproj", "{986990EC-0568-4334-988E-A5009B2A18C3}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch.Persistence.NHibernate", "Touch.Persistence.NHibernate\Touch.Persistence.NHibernate.csproj", "{E533641B-8451-4241-BF49-E0E2C37DEC15}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch.Domain.NHibernate", "Touch.Domain.NHibernate\Touch.Domain.NHibernate.csproj", "{D4D32995-4E56-424D-80CC-A72B5F9833F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Touch.Persistence.MongoDb", "Touch.Persistence.MongoDb\Touch.Persistence.MongoDb.csproj", "{12290B16-9210-4CC3-91D7-A9D92826A9FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D4D32995-4E56-424D-80CC-A72B5F9833F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4D32995-4E56-424D-80CC-A72B5F9833F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4D32995-4E56-424D-80CC-A72B5F9833F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12290B16-9210-4CC3-91D7-A9D92826A9FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12290B16-9210-4CC3-91D7-A9D92826A9FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12290B16-9210-4CC3-91D7-A9D92826A9FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12290B16-9210-4CC3-91D7-A9D92826A9FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

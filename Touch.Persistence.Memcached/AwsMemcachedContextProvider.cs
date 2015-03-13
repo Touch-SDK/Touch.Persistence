@@ -35,6 +35,8 @@ namespace Touch.Persistence
                 clientConfig = new ElastiCacheClusterConfig();
             }
 
+            clientConfig.Transcoder = new DataContractTranscoder();
+
             _client = new MemcachedClient(clientConfig);
         }
         #endregion
