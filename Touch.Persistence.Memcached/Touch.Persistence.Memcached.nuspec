@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Touch.Persistence.Memcached</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <authors>Artem Abashev</authors>
         <projectUrl>https://github.com/Touch-SDK/Touch.Persistence</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Memcached storage for Touch SDK.</description>
         <dependencies>
             <dependency id="Touch" version="1.0.0" />
-            <dependency id="AWSSDK" version="2.1.4.0" />
-            <dependency id="EnyimMemcached" version="2.12" />
+            <dependency id="EnyimMemcached" version="2.13" />
+            <dependency id="Amazon.ElastiCacheCluster" version="1.0.0.2" />
         </dependencies>
     </metadata>
     <files>
