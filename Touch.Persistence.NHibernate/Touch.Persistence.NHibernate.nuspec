@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Touch.Persistence.NHibernate</id>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
         <authors>Artem Abashev</authors>
         <projectUrl>https://github.com/Touch-SDK/Touch.Persistence</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,10 +11,12 @@
             <dependency id="Touch" version="1.0.16" />
             <dependency id="NHibernate" version="4.0.1.4000" />
             <dependency id="NHibernate.Linq" version="1.0" />
+            <dependency id="Touch.ServiceModel" version="1.0.10" />
         </dependencies>
     </metadata>
     <files>
         <file src="bin\Release\Touch.Persistence.NHibernate.dll" target="lib\Touch.Persistence.NHibernate.dll" />
         <file src="bin\Release\Touch.Persistence.NHibernate.pdb" target="lib\Touch.Persistence.NHibernate.pdb" />
+        <file src="bin\Release\Touch.Persistence.NHibernate.XML" target="lib\Touch.Persistence.NHibernate.XML" />
     </files>
 </package>
