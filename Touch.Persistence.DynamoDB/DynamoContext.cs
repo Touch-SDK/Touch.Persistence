@@ -60,7 +60,7 @@ namespace Touch.Persistence
             };
 
             var result = _client.GetItem(request);
-            if (result.Item == null) return null;
+            if (result.Item == null || result.Item.Count == 0) return null;
 
             return (T)GetContract(typeof(T), result.Item);
         }
@@ -201,16 +201,12 @@ namespace Touch.Persistence
                     continue;
 
                 var type = property.Value.GetType();
-
-                if (type.IsValueType && Activator.CreateInstance(type) == property.Value)
-                    continue;
-
                 var value = new AttributeValue();
 
                 if (type == typeof(string))
                     value.S = (string)property.Value;
-                else if (type == typeof(List<string>))
-                    value.SS = (List<string>)property.Value;
+                else if (property.Value is IEnumerable<string>)
+                    value.SS = ((IEnumerable<string>)property.Value).ToList();
                 else if (IsNumericType(type))
                     value.N = property.Value.ToString();
                 else
@@ -241,13 +237,19 @@ namespace Touch.Persistence
         static private object GetValue(AttributeValue attributeValue, Type targetType)
         {
             if (targetType == typeof(string))
-                return attributeValue.S;
+                return attributeValue.S.ToString();
 
             if (IsNumericType(targetType))
                 return Convert.ChangeType(attributeValue.N, targetType);
 
-            if (targetType == typeof(List<string>))
-                return attributeValue.SS;
+            if (targetType == typeof(bool))
+                return bool.Parse(attributeValue.S);
+
+            if (targetType == typeof(List<string>) || targetType == typeof(string[]))
+                return attributeValue.SS.ToArray();
+
+            if (targetType == typeof(DateTime))
+                return DateTime.Parse(attributeValue.S);
 
             if (targetType == typeof(Guid))
                 return Guid.Parse(attributeValue.S);

@@ -25,7 +25,12 @@ namespace Touch.Persistence
             }
             catch (Exception exception)
             {
-                throw HandleException(exception);
+                var ex = HandleException(exception);
+
+                if (ex != null)
+                    throw ex;
+
+                throw;
             }
         }
 
@@ -42,7 +47,7 @@ namespace Touch.Persistence
                 return new Exceptions.ObjectNotUniqueException(exception.Message, exception);
             }
 
-            return exception;
+            return null;
         }
         #endregion
 
